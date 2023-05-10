@@ -16,7 +16,7 @@ public interface IOUtil {
 			throws FileNotFoundException, IOException {
 		try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(fileName))) {
 			out.writeObject(employeeList);// serialization
-		} catch (Exception e) {
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
@@ -26,7 +26,7 @@ public interface IOUtil {
 			throws FileNotFoundException, IOException, ClassNotFoundException {
 		try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(fileName))) {
 			return (Map<String, Employee>) in.readObject();
-		} catch (ClassNotFoundException e) {
+		} catch (Exception e) {
 			return new HashMap<String, Employee>();
 		}
 	}

@@ -42,17 +42,19 @@ public class ValidationRules {
 		return id;	
 	}
 	
-	public static void validateAndPromote(String id, Map<String,Employee> employeeList) throws EmployeeNotFoundException {
+	public static void validateAndPromote(String id,String designation, Map<String,Employee> employeeList) throws EmployeeNotFoundException, InvalidDepartmentException {
 		if(!employeeList.containsKey(id))
 			throw new EmployeeNotFoundException("No such employee");
 		employeeList.get(id).setSalary(employeeList.get(id).getSalary()+5000);
+		Dept dep=parseAndValidateDept(designation);
+		employeeList.get(id).setDept(dep);
 		System.out.println("Employee id :"+id+" Name : "+employeeList.get(id).getfName()+" New Salary : "+employeeList.get(id).getSalary());
 	}
 	public static void validateAndRemove(String id, Map<String,Employee> employeeList) throws EmployeeNotFoundException {
 		if(!employeeList.containsKey(id))
 			throw new EmployeeNotFoundException("No such employee");
 		employeeList.remove(id);		
-		System.out.println("Employee id :"+id+" Name : "+employeeList.get(id).getfName()+" Removed from the list");
+		System.out.println("Employee id :"+id+"Removed from the list");
 	}
 	
 }

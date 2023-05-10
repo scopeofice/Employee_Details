@@ -1,9 +1,10 @@
 package com.test;
 
+import static com.util.IOUtil.restoreEmpDetails;
+import static com.util.IOUtil.storeEmpDetails;
 import static com.util.ValidationRules.validateAllInputs;
 import static com.util.ValidationRules.validateAndPromote;
 import static com.util.ValidationRules.validateAndRemove;
-import static com.util.IOUtil.*;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -20,6 +21,7 @@ public class TestEmployee {
 			Map<String, Employee> employeeList = restoreEmpDetails("emplist");
 			boolean exit = false;
 			while (!exit) {
+				System.out.println(" ");
 				System.out.println("1. Hire new emp");
 				System.out.println("2. List all emp details");
 				System.out.println("3. Promote an emp");
@@ -43,7 +45,11 @@ public class TestEmployee {
 					case "3":
 						System.out.println("Enter Id of the Employee :");
 						String empid = sc.next();
-						validateAndPromote(empid, employeeList);
+						System.out.println("Enter new designation");
+						String designation=sc.next();
+						employeeList.values().stream().filter(null);
+						validateAndPromote(empid,designation,employeeList);
+						
 						break;
 					case "4":
 						System.out.println("Enter employee id : ");
@@ -58,9 +64,10 @@ public class TestEmployee {
 					case "0":
 						System.out.print("Exiting...");
 						exit = true;
-						storeEmpDetails("emplist",employeeList);
+						storeEmpDetails("emplist", employeeList);
 						break;
 					default:
+						System.out.print("Invalid chooce");
 						break;
 					}
 				} catch (Exception e) {
